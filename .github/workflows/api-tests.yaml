@@ -24,7 +24,7 @@ jobs:
             --reporter-htmlextra-export reports/report.html
 
       - name: Upload Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: petstore-report
           path: reports/report.html
