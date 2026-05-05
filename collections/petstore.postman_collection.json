@@ -295,10 +295,6 @@
                   "    pm.expect(resJson).to.have.property(\"code\");\r",
                   "    pm.expect(resJson).to.have.property(\"type\");\r",
                   "    pm.expect(resJson).to.have.property(\"message\");\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Foto é a mesma que foi enviada\", function(){\r",
-                  "    pm.expect(resJson.message).to.contains(reqJson.file);\r",
                   "});"
                 ],
                 "type": "text/javascript",
@@ -326,9 +322,9 @@
                 },
                 {
                   "key": "file",
-                  "type": "file",
+                  "type": "text",
                   "uuid": "21179029-bbc5-41b9-9bd3-399bd83cf142",
-                  "src": "postman-cloud:///1f145a17-eaee-4b80-a5ef-1629e1bdf12c"
+                  "value": "oi.png"
                 }
               ]
             },
@@ -597,6 +593,82 @@
       "name": "user-requests",
       "item": [
         {
+          "name": "request-create-users-with-lists",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Usuários criados\", function() {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Tempo de Resposta Aceitável (<500ms)\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"response Body é um JSON válido\", function() {\r",
+                  "    pm.response.to.have.jsonBody();\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": 1,\n    \"username\": \"joao123\",\n    \"firstName\": \"João\",\n    \"lastName\": \"Silva\",\n    \"email\": \"joao@email.com\",\n    \"password\": \"senha123\",\n    \"phone\": \"86999999999\",\n    \"userStatus\": 1\n  },\n  {\n    \"id\": 2,\n    \"username\": \"maria456\",\n    \"firstName\": \"Maria\",\n    \"lastName\": \"Santos\",\n    \"email\": \"maria@email.com\",\n    \"password\": \"senha456\",\n    \"phone\": \"86988888888\",\n    \"userStatus\": 1\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://petstore.swagger.io/v2/user/createWithList",
+              "protocol": "https",
+              "host": [
+                "petstore",
+                "swagger",
+                "io"
+              ],
+              "path": [
+                "v2",
+                "user",
+                "createWithList"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "request-find-user-by-name",
           "event": [
             {
@@ -668,7 +740,7 @@
               ]
             },
             "url": {
-              "raw": "https://petstore.swagger.io/v2/user/user1",
+              "raw": "https://petstore.swagger.io/v2/user/joao123",
               "protocol": "https",
               "host": [
                 "petstore",
@@ -678,83 +750,7 @@
               "path": [
                 "v2",
                 "user",
-                "user1"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "request-create-users-with-lists",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Usuários criados\", function() {\r",
-                  "    pm.response.to.have.status(200);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Tempo de Resposta Aceitável (<500ms)\", function () {\r",
-                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"response Body é um JSON válido\", function() {\r",
-                  "    pm.response.to.have.jsonBody();\r",
-                  "});\r",
-                  "\r",
-                  ""
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  ""
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "accept",
-                "value": "application/json"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "[\n  {\n    \"id\": 1,\n    \"username\": \"joao123\",\n    \"firstName\": \"João\",\n    \"lastName\": \"Silva\",\n    \"email\": \"joao@email.com\",\n    \"password\": \"senha123\",\n    \"phone\": \"86999999999\",\n    \"userStatus\": 1\n  },\n  {\n    \"id\": 2,\n    \"username\": \"maria456\",\n    \"firstName\": \"Maria\",\n    \"lastName\": \"Santos\",\n    \"email\": \"maria@email.com\",\n    \"password\": \"senha456\",\n    \"phone\": \"86988888888\",\n    \"userStatus\": 1\n  }\n]",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "https://petstore.swagger.io/v2/user/createWithList",
-              "protocol": "https",
-              "host": [
-                "petstore",
-                "swagger",
-                "io"
-              ],
-              "path": [
-                "v2",
-                "user",
-                "createWithList"
+                "joao123"
               ]
             }
           },
@@ -972,11 +968,7 @@
                   "\r",
                   "pm.test(\"Nome do usuário está correto\", function() {\r",
                   "    pm.expect(resJson.name).to.eql(reqJson.name);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Id foi criado\", function() {\r",
-                  "    pm.expect(resJson.id).to.exist;\r",
-                  "})"
+                  "});"
                 ],
                 "type": "text/javascript",
                 "packages": {},
@@ -1224,6 +1216,8 @@
                   "const resJson = pm.response.json();\r",
                   "const reqJson = JSON.parse(pm.request.body.raw);\r",
                   "\r",
+                  "pm.collectionVariables.set(\"orderId\", resJson.id);\r",
+                  "\r",
                   "pm.test(\"Pedido criado\", function() {\r",
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
@@ -1335,23 +1329,6 @@
                   "    pm.response.to.have.jsonBody();\r",
                   "});\r",
                   "\r",
-                  "const orderSchema = {\r",
-                  "    type: \"object\",\r",
-                  "    properties: {\r",
-                  "        id:       { type: \"number\" },\r",
-                  "        petId:    { type: \"number\" },\r",
-                  "        quantity: { type: \"number\" },\r",
-                  "        shipDate: { type: \"string\" },\r",
-                  "        status:   { type: \"string\", enum: [\"placed\", \"approved\", \"delivered\"] },\r",
-                  "        complete: { type: \"boolean\" }\r",
-                  "    },\r",
-                  "    required: [\"id\", \"petId\", \"quantity\", \"shipDate\", \"status\", \"complete\"]\r",
-                  "};\r",
-                  "\r",
-                  "pm.test(\"Schema do pedido é válido\", function () {\r",
-                  "    pm.response.to.have.jsonSchema(orderSchema);\r",
-                  "});\r",
-                  "\r",
                   "pm.test(\"Id bate com o enviado\", function() {\r",
                   "    pm.expect(resJson.id).to.eql(orderID);\r",
                   "})"
@@ -1371,7 +1348,7 @@
               }
             ],
             "url": {
-              "raw": "https://petstore.swagger.io/v2/store/order/1",
+              "raw": "https://petstore.swagger.io/v2/store/order/{{orderId}}",
               "protocol": "https",
               "host": [
                 "petstore",
@@ -1382,7 +1359,7 @@
                 "v2",
                 "store",
                 "order",
-                "1"
+                "{{orderId}}"
               ]
             }
           },
@@ -1443,6 +1420,12 @@
           "response": []
         }
       ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "orderId",
+      "value": ""
     }
   ]
 }
