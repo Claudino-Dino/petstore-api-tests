@@ -1,0 +1,30 @@
+name: PetStore API Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  api-tests:
+    name: PetStore API Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Newman
+        run: npm install -g newman newman-reporter-htmlextra
+
+      - name: Run Tests
+        run: |
+          newman run collections/petstore.postman_collection.json \
+            -e environments/petstore.postman_environment.json \
+            --reporters cli,htmlextra \
+            --reporter-htmlextra-export reports/report.html
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: petstore-report
+          path: reports/report.html
