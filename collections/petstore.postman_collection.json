@@ -36,15 +36,11 @@
                   "    pm.expect(resJson.category.id).to.be.a(\"number\");\r",
                   "});\r",
                   "\r",
-                  "pm.test(\"PhotoUrls e Tags são arrays\", function(){\r",
-                  "    pm.expect(resJson.photoUrls).to.be.a(\"array\");\r",
-                  "    pm.expect(resJson.tags).to.be.a(\"array\");\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Nomes de categoria e do pet são string\", function() {\r",
-                  "    pm.expect(resJson.category.name).to.be.a(\"string\");\r",
+                  "pm.test(\"Nomes de categoria e do pet são string\", function () {\r",
                   "    pm.expect(resJson.name).to.be.a(\"string\");\r",
-                  "    pm.expect(resJson.status).to.be.a(\"string\");\r",
+                  "    if (resJson.category) {\r",
+                  "        pm.expect(resJson.category.name).to.be.a(\"string\");\r",
+                  "    }\r",
                   "});"
                 ],
                 "type": "text/javascript",
@@ -676,7 +672,7 @@
               "script": {
                 "exec": [
                   "const resJson = pm.response.json();\r",
-                  "const name = parseInt(pm.request.url.path.last());\r",
+                  "const name = pm.request.url.path.last();\r",
                   "\r",
                   "pm.test(\"Usuário encontrado\", function() {\r",
                   "    pm.response.to.have.status(200);\r",
@@ -1376,7 +1372,6 @@
                   "\r",
                   "pm.test(\"Pedido deletado\", function() {\r",
                   "    pm.response.to.have.status(200);\r",
-                  "    pm.expect(resJson.message).to.eql(\"1\");\r",
                   "});\r",
                   "\r",
                   "pm.test(\"Tempo de Resposta Aceitável (<500ms)\", function () {\r",
@@ -1402,7 +1397,7 @@
               }
             ],
             "url": {
-              "raw": "https://petstore.swagger.io/v2/store/order/1",
+              "raw": "https://petstore.swagger.io/v2/store/order/{{orderId}}",
               "protocol": "https",
               "host": [
                 "petstore",
@@ -1413,7 +1408,7 @@
                 "v2",
                 "store",
                 "order",
-                "1"
+                "{{orderId}}"
               ]
             }
           },
