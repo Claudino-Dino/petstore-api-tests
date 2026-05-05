@@ -1279,7 +1279,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 0,\n  \"petId\": 0,\n  \"quantity\": 6,\n  \"shipDate\": \"2026-05-05T12:56:25.581Z\",\n  \"status\": \"placed\",\n  \"complete\": true\n}",
+              "raw": "{\n  \"id\": 5,\n  \"petId\": 0,\n  \"quantity\": 6,\n  \"shipDate\": \"2026-05-05T12:56:25.581Z\",\n  \"status\": \"placed\",\n  \"complete\": true\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1344,7 +1344,7 @@
               }
             ],
             "url": {
-              "raw": "https://petstore.swagger.io/v2/store/order/{{orderId}}",
+              "raw": "https://petstore.swagger.io/v2/store/order/5",
               "protocol": "https",
               "host": [
                 "petstore",
@@ -1355,7 +1355,7 @@
                 "v2",
                 "store",
                 "order",
-                "{{orderId}}"
+                "5"
               ]
             }
           },
@@ -1397,7 +1397,7 @@
               }
             ],
             "url": {
-              "raw": "https://petstore.swagger.io/v2/store/order/{{orderId}}",
+              "raw": "https://petstore.swagger.io/v2/store/order/5",
               "protocol": "https",
               "host": [
                 "petstore",
@@ -1408,7 +1408,7 @@
                 "v2",
                 "store",
                 "order",
-                "{{orderId}}"
+                "5"
               ]
             }
           },
