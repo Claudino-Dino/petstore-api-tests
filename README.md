@@ -56,8 +56,7 @@ Cobertura completa de todos os endpoints da [PetStore Swagger](https://petstore.
 
 - ✅ Status code correto
 - ✅ Tempo de resposta aceitável
-- ✅ Schema da resposta (tipos e campos obrigatórios)
-- ✅ Consistência dos dados (o que foi enviado bate com o que foi retornado)
+- ✅ Verificar se a resposta é um JSON válido
 
 ---
 
