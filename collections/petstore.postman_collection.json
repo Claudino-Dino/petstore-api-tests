@@ -68,7 +68,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"id\": null,\r\n  \"category\": {\r\n    \"id\": 5,\r\n    \"name\": \"cachorro\"\r\n  },\r\n  \"name\": \"Raimundim\",\r\n  \"photoUrls\": [\r\n    \"\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"sold\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
+              "raw": "{\r\n  \"id\": 5,\r\n  \"category\": {\r\n    \"id\": 5,\r\n    \"name\": \"cachorro\"\r\n  },\r\n  \"name\": \"Raimundim\",\r\n  \"photoUrls\": [\r\n    \"\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"sold\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
             },
             "url": {
               "raw": "https://petstore.swagger.io/v2/pet",
@@ -567,7 +567,7 @@
               "urlencoded": []
             },
             "url": {
-              "raw": "https://petstore.swagger.io/v2/pet/1",
+              "raw": "https://petstore.swagger.io/v2/pet/5",
               "protocol": "https",
               "host": [
                 "petstore",
@@ -577,7 +577,7 @@
               "path": [
                 "v2",
                 "pet",
-                "1"
+                "5"
               ]
             }
           },
