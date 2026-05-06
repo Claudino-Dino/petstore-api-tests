@@ -11,6 +11,82 @@
       "name": "pet-requests",
       "item": [
         {
+          "name": "request-add-pet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const resJson = pm.response.json();",
+                  "const reqJson = JSON.parse(pm.request.body.raw);",
+                  "",
+                  "pm.test(\"Pet adicionado\", function() {",
+                  "    pm.expect(resJson.id).to.be.a('number');",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Tempo de Resposta Aceitável (<500ms)\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);",
+                  "});",
+                  "",
+                  "pm.test(\"response Body é um JSON válido\", function() {",
+                  "    pm.response.to.have.jsonBody();",
+                  "});",
+                  "",
+                  "pm.test(\"Nome do pet está correto\", function() {",
+                  "    pm.expect(resJson.name).to.eql(reqJson.name);",
+                  "});",
+                  "",
+                  "pm.test(\"Id foi criado\", function() {",
+                  "    pm.expect(resJson.id).to.exist;",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id\": null,\r\n  \"category\": {\r\n    \"id\": 5,\r\n    \"name\": \"cachorro\"\r\n  },\r\n  \"name\": \"Raimundim\",\r\n  \"photoUrls\": [\r\n    \"\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"sold\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
+            },
+            "url": {
+              "raw": "https://petstore.swagger.io/v2/pet",
+              "protocol": "https",
+              "host": [
+                "petstore",
+                "swagger",
+                "io"
+              ],
+              "path": [
+                "v2",
+                "pet"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "request-find-pet-by-id",
           "event": [
             {
@@ -89,7 +165,7 @@
               ]
             },
             "url": {
-              "raw": "https://petstore.swagger.io/v2/pet/1",
+              "raw": "https://petstore.swagger.io/v2/pet/5",
               "protocol": "https",
               "host": [
                 "petstore",
@@ -99,7 +175,7 @@
               "path": [
                 "v2",
                 "pet",
-                "1"
+                "5"
               ]
             }
           },
@@ -248,7 +324,7 @@
               ]
             },
             "url": {
-              "raw": "https://petstore.swagger.io/v2/pet/1",
+              "raw": "https://petstore.swagger.io/v2/pet/5",
               "protocol": "https",
               "host": [
                 "petstore",
@@ -258,7 +334,7 @@
               "path": [
                 "v2",
                 "pet",
-                "1"
+                "5"
               ]
             }
           },
@@ -337,82 +413,6 @@
                 "pet",
                 "1",
                 "uploadImage"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "request-add-pet",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const resJson = pm.response.json();",
-                  "const reqJson = JSON.parse(pm.request.body.raw);",
-                  "",
-                  "pm.test(\"Pet adicionado\", function() {",
-                  "    pm.expect(resJson.id).to.be.a('number');",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "",
-                  "pm.test(\"Tempo de Resposta Aceitável (<500ms)\", function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test(\"response Body é um JSON válido\", function() {",
-                  "    pm.response.to.have.jsonBody();",
-                  "});",
-                  "",
-                  "pm.test(\"Nome do pet está correto\", function() {",
-                  "    pm.expect(resJson.name).to.eql(reqJson.name);",
-                  "});",
-                  "",
-                  "pm.test(\"Id foi criado\", function() {",
-                  "    pm.expect(resJson.id).to.exist;",
-                  "})"
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  ""
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n  \"id\": null,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"cachorro\"\r\n  },\r\n  \"name\": \"Raimundim\",\r\n  \"photoUrls\": [\r\n    \"\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"sold\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
-            },
-            "url": {
-              "raw": "https://petstore.swagger.io/v2/pet",
-              "protocol": "https",
-              "host": [
-                "petstore",
-                "swagger",
-                "io"
-              ],
-              "path": [
-                "v2",
-                "pet"
               ]
             }
           },
@@ -502,7 +502,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"id\": 1,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"cachorro\"\r\n  },\r\n  \"name\": \"Raimundim\",\r\n  \"photoUrls\": [\r\n    \"\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"sold\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+              "raw": "{\r\n  \"id\": 8,\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"cachorro\"\r\n  },\r\n  \"name\": \"Raimundim\",\r\n  \"photoUrls\": [\r\n    \"\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"sold\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1420,6 +1420,10 @@
   "variable": [
     {
       "key": "orderId",
+      "value": ""
+    },
+    {
+      "key": "petId",
       "value": ""
     }
   ]
